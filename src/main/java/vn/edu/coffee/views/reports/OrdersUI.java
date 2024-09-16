@@ -6,9 +6,7 @@ package vn.edu.coffee.views.reports;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
@@ -175,7 +173,7 @@ public class OrdersUI extends javax.swing.JFrame {
             tbItems.removeAll();
             float total = 0f;
             for (Bill item : list) {
-
+                total += item.getTotal();
                 tableModel.addRow(new Object[]{
                     item.getId(),
                     item.getAmount(),

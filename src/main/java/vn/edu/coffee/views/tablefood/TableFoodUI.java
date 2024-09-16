@@ -4,6 +4,7 @@
  */
 package vn.edu.coffee.views.tablefood;
 
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -41,27 +42,42 @@ public class TableFoodUI extends BaseFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
+        lblInfo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         btnUpdate = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnDel = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
         jLabel1 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        jToolBar2 = new javax.swing.JToolBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbTableFood = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Table Management");
+        setResizable(false);
 
-        jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToolBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         jToolBar1.setFloatable(true);
 
+        lblInfo.setText(" ");
+        jToolBar1.add(lblInfo);
+
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 4, 4, 4));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        btnAdd.setBackground(new java.awt.Color(255, 102, 102));
         btnAdd.setText("Add New");
-        btnAdd.setFocusable(false);
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -69,12 +85,11 @@ public class TableFoodUI extends BaseFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnAdd);
-        jToolBar1.add(jSeparator1);
+        jPanel3.add(btnAdd);
 
+        btnUpdate.setBackground(new java.awt.Color(0, 255, 153));
         btnUpdate.setText("Update");
         btnUpdate.setActionCommand("");
-        btnUpdate.setFocusable(false);
         btnUpdate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUpdate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -82,12 +97,11 @@ public class TableFoodUI extends BaseFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnUpdate);
-        jToolBar1.add(jSeparator2);
+        jPanel3.add(btnUpdate);
 
+        btnDel.setBackground(new java.awt.Color(255, 255, 153));
         btnDel.setText("Delete");
         btnDel.setToolTipText("");
-        btnDel.setFocusable(false);
         btnDel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDel.addActionListener(new java.awt.event.ActionListener() {
@@ -95,15 +109,15 @@ public class TableFoodUI extends BaseFrame {
                 btnDelActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnDel);
-        jToolBar1.add(jSeparator3);
+        jPanel3.add(btnDel);
 
         jLabel1.setText("Search");
-        jToolBar1.add(jLabel1);
-        jToolBar1.add(txtSearch);
+        jPanel3.add(jLabel1);
+
+        txtSearch.setPreferredSize(new java.awt.Dimension(180, 22));
+        jPanel3.add(txtSearch);
 
         btnSearch.setText("Search");
-        btnSearch.setFocusable(false);
         btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -111,12 +125,11 @@ public class TableFoodUI extends BaseFrame {
                 btnSearchActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnSearch);
+        jPanel3.add(btnSearch);
 
-        jToolBar2.setRollover(true);
-        jToolBar1.add(jToolBar2);
+        jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
-        getContentPane().add(jToolBar1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -135,7 +148,9 @@ public class TableFoodUI extends BaseFrame {
         tbTableFood.setUpdateSelectionOnSort(false);
         jScrollPane1.setViewportView(tbTableFood);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -170,12 +185,12 @@ public class TableFoodUI extends BaseFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JTable tbTableFood;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
@@ -206,13 +221,15 @@ public class TableFoodUI extends BaseFrame {
         setEnabledButton();
         this.tbTableFood.removeAll();
         this.tableModel.setRowCount(0);
-        for (TableFood item : ctrl.find(txtSearch.getText())) {
+        List<TableFood> list = ctrl.find(txtSearch.getText()); 
+        for (TableFood item : list) {
             tableModel.addRow(new Object[]{
                 item.getId(), item.getName(), 
                 item.getIdBill(),
                 item.isStatus() ? "Available" : "Unavailable"
             });
         }
+        lblInfo.setText(String.format("Total: %d items", list.size()));
         tbTableFood.revalidate();
         tbTableFood.repaint();
     }

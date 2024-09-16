@@ -4,6 +4,7 @@
  */
 package vn.edu.coffee.views.menuitem;
 
+import java.util.List;
 import vn.edu.coffee.views.*;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
@@ -40,27 +41,38 @@ public class MenuItemUI extends BaseFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
+        lblInfo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         btnUpdate = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnDel = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
         jLabel1 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        jToolBar2 = new javax.swing.JToolBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbItems = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MenuItem Management");
+        setResizable(false);
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jToolBar1.setFloatable(true);
 
+        lblInfo.setText("jLabel2");
+        lblInfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        jToolBar1.add(lblInfo);
+
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
+
+        jPanel1.setLayout(new java.awt.BorderLayout(0, 4));
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        btnAdd.setBackground(new java.awt.Color(255, 102, 102));
         btnAdd.setText("Add New");
-        btnAdd.setFocusable(false);
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -68,12 +80,11 @@ public class MenuItemUI extends BaseFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnAdd);
-        jToolBar1.add(jSeparator1);
+        jPanel2.add(btnAdd);
 
+        btnUpdate.setBackground(new java.awt.Color(0, 255, 153));
         btnUpdate.setText("Update");
         btnUpdate.setActionCommand("");
-        btnUpdate.setFocusable(false);
         btnUpdate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUpdate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -81,12 +92,11 @@ public class MenuItemUI extends BaseFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnUpdate);
-        jToolBar1.add(jSeparator2);
+        jPanel2.add(btnUpdate);
 
+        btnDel.setBackground(new java.awt.Color(255, 255, 153));
         btnDel.setText("Delete");
         btnDel.setToolTipText("");
-        btnDel.setFocusable(false);
         btnDel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDel.addActionListener(new java.awt.event.ActionListener() {
@@ -94,29 +104,30 @@ public class MenuItemUI extends BaseFrame {
                 btnDelActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnDel);
-        jToolBar1.add(jSeparator3);
+        jPanel2.add(btnDel);
 
         jLabel1.setText("Search");
-        jToolBar1.add(jLabel1);
+        jPanel2.add(jLabel1);
 
+        txtSearch.setPreferredSize(new java.awt.Dimension(180, 22));
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSearchActionPerformed(evt);
             }
         });
-        jToolBar1.add(txtSearch);
+        jPanel2.add(txtSearch);
 
         btnSearch.setText("Search");
-        btnSearch.setFocusable(false);
         btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnSearch);
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnSearch);
 
-        jToolBar2.setRollover(true);
-        jToolBar1.add(jToolBar2);
-
-        getContentPane().add(jToolBar1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -129,14 +140,16 @@ public class MenuItemUI extends BaseFrame {
                 "ID", "Name", "Price", "Status"
             }
         ));
-        tbItems.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tbItems.setSelectionBackground(new java.awt.Color(0, 153, 153));
         tbItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbItems.setShowGrid(true);
         tbItems.setUpdateSelectionOnSort(false);
         jScrollPane1.setViewportView(tbItems);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,18 +170,21 @@ public class MenuItemUI extends BaseFrame {
         onLoadData();
     }//GEN-LAST:event_txtSearchActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        onLoadData();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JTable tbItems;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
@@ -197,13 +213,15 @@ public class MenuItemUI extends BaseFrame {
         setEnabledButton();
         this.tbItems.removeAll();
         this.tableModel.setRowCount(0);
-        for (MenuItem item : ctrl.find(txtSearch.getText())) {
+        List<MenuItem> list = ctrl.find(txtSearch.getText());
+        for (MenuItem item : list) {
             tableModel.addRow(new Object[]{
                 item.getId(), item.getName(),
                 String.format("%(,.0f", item.getPrice()),
                 item.isStatus() ? "Available" : "Unavailable"
             });
         }
+        lblInfo.setText(String.format("Total: %d items", list.size()));
         this.tbItems.revalidate();
         this.tbItems.repaint();
     }

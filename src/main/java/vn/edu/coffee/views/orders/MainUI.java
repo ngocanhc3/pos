@@ -4,20 +4,25 @@
  */
 package vn.edu.coffee.views.orders;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import vn.edu.coffee.controllers.BillCtrl;
 import vn.edu.coffee.controllers.OrderDetailCtrl;
+import vn.edu.coffee.events.ActionAddMenuItem;
 import vn.edu.coffee.events.MyActionEvent;
 import vn.edu.coffee.models.Bill;
 import vn.edu.coffee.models.MenuItem;
 import vn.edu.coffee.models.OrderDetail;
 import vn.edu.coffee.models.TableFood;
+import vn.edu.coffee.views.AboutUI;
 import vn.edu.coffee.views.HelperUI;
 import vn.edu.coffee.views.tablefood.TableFoodUI;
 import vn.edu.coffee.views.menuitem.MenuItemUI;
 import vn.edu.coffee.views.reports.OrderReportUI;
+import vn.edu.coffee.views.reports.OrdersUI;
 
 /**
  *
@@ -51,6 +56,7 @@ public class MainUI extends javax.swing.JFrame {
         miTable = new javax.swing.JMenuItem();
         miMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        miOrderDaily = new javax.swing.JMenuItem();
         miOrders = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miAbout = new javax.swing.JMenuItem();
@@ -107,6 +113,14 @@ public class MainUI extends javax.swing.JFrame {
 
         jMenu1.setText("Report");
 
+        miOrderDaily.setText("Daily report");
+        miOrderDaily.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miOrderDailyActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miOrderDaily);
+
         miOrders.setText("Orders");
         miOrders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +134,11 @@ public class MainUI extends javax.swing.JFrame {
         jMenu2.setText("Help");
 
         miAbout.setText("About");
+        miAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAboutActionPerformed(evt);
+            }
+        });
         jMenu2.add(miAbout);
 
         mbMenu.add(jMenu2);
@@ -142,8 +161,16 @@ public class MainUI extends javax.swing.JFrame {
         new MenuItemUI().setVisible(true);
     }//GEN-LAST:event_miMenuItemActionPerformed
 
-    private void miOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOrdersActionPerformed
+    private void miOrderDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOrderDailyActionPerformed
         new OrderReportUI().setVisible(true);
+    }//GEN-LAST:event_miOrderDailyActionPerformed
+
+    private void miAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAboutActionPerformed
+        new AboutUI().setVisible(true);
+    }//GEN-LAST:event_miAboutActionPerformed
+
+    private void miOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOrdersActionPerformed
+        new OrdersUI().setVisible(true);
     }//GEN-LAST:event_miOrdersActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,6 +183,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenu menuManage;
     private javax.swing.JMenuItem miAbout;
     private javax.swing.JMenuItem miMenuItem;
+    private javax.swing.JMenuItem miOrderDaily;
     private javax.swing.JMenuItem miOrders;
     private javax.swing.JMenuItem miTable;
     private javax.swing.JSplitPane splitPaneRight;
@@ -172,6 +200,9 @@ public class MainUI extends javax.swing.JFrame {
     private TableFood tableFood;
 
     private void afterInitComponents() {
+        ImageIcon icon = new ImageIcon(MainUI.class.getResource("/icons/coffee.png"));
+        setIconImage(icon.getImage());
+        
         billCtrl = new BillCtrl();
         orderCtrl = new OrderDetailCtrl();
         setLocationRelativeTo(null);
@@ -208,12 +239,12 @@ public class MainUI extends javax.swing.JFrame {
         }
     }
 
-    private class OnMenuItemSelected implements MyActionEvent<MenuItem> {
+    private class OnMenuItemSelected implements ActionAddMenuItem {
 
         @Override
-        public void onAction(MenuItem item) {
+        public void onAction(MenuItem item, int qty) {
             if (tableFood != null) {
-                orderCtrl.add(new OrderDetail(tableFood.getIdBill(), item, 1));
+                orderCtrl.add(new OrderDetail(tableFood.getIdBill(), item, qty));
                 uiOrderDetail.onLoadData(tableFood);
 
             }

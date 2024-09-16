@@ -4,8 +4,11 @@
  */
 package vn.edu.coffee.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import vn.edu.coffee.models.Bill;
+import vn.edu.coffee.utils.DateUtils;
 
 /**
  *
@@ -33,6 +36,13 @@ public class BillCtrl extends BaseController implements IController<Bill, Long> 
         return this.getDb().getBills().all();
     }
 
+    public List<Bill> find(LocalDate from, LocalDate to) throws Exception{
+        return this.getDb().getBills().find(String.format(" checkoutAt BETWEEN '%s' AND '%s'",
+                DateUtils.toDateSql(from),
+                DateUtils.toDateSql(to)
+        ));
+    }
+
     @Override
     public Bill findById(Long id) {
         return this.getDb().getBills().findById(id);
@@ -45,8 +55,8 @@ public class BillCtrl extends BaseController implements IController<Bill, Long> 
     public boolean checkout(final long tableId, final long billId) {
         return this.getDb().getBills().checkout(tableId, billId);
     }
-    
-     public List<Object[]> orderReport(String whereClause) {
-         return this.getDb().getBills().orderReport(whereClause);
-     }
+
+    public List<Object[]> orderReport(String whereClause) {
+        return this.getDb().getBills().orderReport(whereClause);
+    }
 }

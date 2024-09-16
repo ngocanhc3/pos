@@ -78,19 +78,28 @@ public class OrderDetailDao extends BaseDao {
             OrderDetail tmp = this.findById(item.getBillId(), item.getItemId());
             PreparedStatement spStatement;
             if (tmp == null) {
+                if (item.getAmount() < 1) {
+                    return false;
+                }
                 String sql = "INSERT INTO OrderDetail (billId, itemId, price, amount) VALUES (?, ?, ?, ?)";
                 spStatement = this.connector.getPreStatement(sql);
                 spStatement.setLong(1, item.getBillId());
                 spStatement.setLong(2, item.getItemId());
                 spStatement.setFloat(3, item.getPrice());
-                spStatement.setInt(4, 1);
-
+                spStatement.setInt(4, item.getAmount());
             } else {
-                String sql = "UPDATE OrderDetail SET amount = ? WHERE billId = ? AND itemId = ? ";
-                spStatement = this.connector.getPreStatement(sql);
-                spStatement.setInt(1, tmp.getAmount() + 1);
-                spStatement.setLong(2, item.getBillId());
-                spStatement.setLong(3, item.getItemId());
+                int amount = tmp.getAmount() + item.getAmount();
+                if (amount < 1) { // delete
+                    spStatement = this.connector.getPreStatement("DELETE FROM OrderDetail WHERE billId = ? AND itemId = ?  ");
+                    spStatement.setLong(1, item.getBillId());
+                    spStatement.setLong(2, item.getItemId());
+                } else {
+                    String sql = "UPDATE OrderDetail SET amount = ? WHERE billId = ? AND itemId = ? ";
+                    spStatement = this.connector.getPreStatement(sql);
+                    spStatement.setInt(1, amount);
+                    spStatement.setLong(2, item.getBillId());
+                    spStatement.setLong(3, item.getItemId());
+                }
             }
 
             int result = spStatement.executeUpdate();

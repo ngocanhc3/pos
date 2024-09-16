@@ -4,9 +4,7 @@
 package vn.edu.coffee;
 
 import vn.edu.coffee.controllers.MenuItemCtrl;
-import vn.edu.coffee.controllers.TableFoodCtrl;
 import vn.edu.coffee.models.MenuItem;
-import vn.edu.coffee.models.TableFood;
 import vn.edu.coffee.views.orders.MainUI;
 
 /**
@@ -16,7 +14,7 @@ import vn.edu.coffee.views.orders.MainUI;
 public class Coffee {
 
     public static void main(String[] args) {
-        // initFakeData();
+//         initFakeData();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainUI().setVisible(true);
@@ -27,10 +25,10 @@ public class Coffee {
     private static void initFakeData() {
         try {
 //            Table
-            TableFoodCtrl tableFoodCtrl = new TableFoodCtrl();
-            for (int i = 1; i < 10; i++) {
-                tableFoodCtrl.add(new TableFood(String.format("Table %d", i + 1)));
-            }
+//            TableFoodCtrl tableFoodCtrl = new TableFoodCtrl();
+//            for (int i = 1; i < 10; i++) {
+//                tableFoodCtrl.add(new TableFood(String.format("Table %d", i + 1)));
+//            }
 
 //            Menu item
             MenuItem[] menus = {

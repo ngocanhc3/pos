@@ -37,7 +37,7 @@ public class Bill {
         
         Timestamp checkout = result.getTimestamp("checkoutAt");
         if (checkout != null) 
-            checkinAt = checkout.toLocalDateTime();
+            checkoutAt = checkout.toLocalDateTime();
         note = result.getString("note");
     }
 

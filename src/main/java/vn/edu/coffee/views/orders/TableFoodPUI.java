@@ -4,6 +4,7 @@
  */
 package vn.edu.coffee.views.orders;
 
+import javax.swing.ImageIcon;
 import vn.edu.coffee.controllers.TableFoodCtrl;
 import vn.edu.coffee.events.MyActionEvent;
 import vn.edu.coffee.models.TableFood;
@@ -31,48 +32,83 @@ public class TableFoodPUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         pTable = new javax.swing.JPanel();
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setBackground(new java.awt.Color(255, 51, 51));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 8, 4, 8));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 102));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tables");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 1, 6, 1));
+        jPanel3.add(jLabel1, java.awt.BorderLayout.WEST);
 
+        btnRefresh.setText("Refresh");
+        btnRefresh.setBorder(null);
+        btnRefresh.setContentAreaFilled(false);
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRefresh, java.awt.BorderLayout.EAST);
+
+        jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
+        pTable.setBackground(new java.awt.Color(204, 255, 204));
         pTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pTable.setLayout(new java.awt.GridLayout(0, 4, 10, 10));
         jScrollPane1.setViewportView(pTable);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
-        );
+        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        onLoadData();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
     private TableFoodCtrl ctrl;
-    
+
     private MyActionEvent<TableFood> onTableItemClick;
-    
+
     private void afterInitComponents() {
         ctrl = TableFoodCtrl.getInstance();
+        ImageIcon icon = new ImageIcon(MainUI.class.getResource("/icons/refresh.png"));
+        btnRefresh.setIcon(icon);
+        btnRefresh.setContentAreaFilled(false);
+        btnRefresh.setOpaque(false);
+        btnRefresh.setBorderPainted(false);
+        btnRefresh.setText("");
         onLoadData();
     }
-    
+
     public void onLoadData() {
         pTable.removeAll();
         for (TableFood tableFood : ctrl.all()) {
@@ -83,24 +119,28 @@ public class TableFoodPUI extends javax.swing.JPanel {
         pTable.revalidate();
         pTable.repaint();
     }
-    
+
     private class OnTableClick implements MyActionEvent<TableFood> {
 
         @Override
         public void onAction(TableFood item) {
-            if(onTableItemClick != null) {
+            if (onTableItemClick != null) {
                 onTableItemClick.onAction(item);
             }
         }
     }
-    
+
     public void addTableClick(MyActionEvent<TableFood> evt) {
         onTableItemClick = evt;
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pTable;
     // End of variables declaration//GEN-END:variables

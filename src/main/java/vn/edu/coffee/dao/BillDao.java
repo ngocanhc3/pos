@@ -41,17 +41,25 @@ public class BillDao extends BaseDao implements IGeneric<Bill, Long> {
     @Override
     public List<Bill> all() {
         try {
-            List<Bill> ls = new ArrayList<>();
-            ResultSet result = this.connector.select("Select * from Bill");
-
-            while (result.next()) {
-                ls.add(new Bill(result));
-            }
-
-            return ls;
+            return find(null);
         } catch (Exception e) {
             return new ArrayList<>();
         }
+
+    }
+
+    public List<Bill> find(String whereClause) throws Exception {
+        List<Bill> ls = new ArrayList<>();
+        String SQL = "Select * from Bill ";
+        if (whereClause != null && !whereClause.isEmpty()) {
+            SQL = String.format("%s WHERE 1 = 1 AND %s", SQL, whereClause);
+        }
+        ResultSet result = this.connector.select(SQL);
+        while (result.next()) {
+            ls.add(new Bill(result));
+        }
+
+        return ls;
     }
 
     @Override
@@ -176,8 +184,7 @@ public class BillDao extends BaseDao implements IGeneric<Bill, Long> {
                 ls.add(new Object[]{
                     result.getString("timeAt"),
                     result.getInt("amount"),
-                    result.getFloat("total"),
-                });
+                    result.getFloat("total"),});
             }
 
             return ls;

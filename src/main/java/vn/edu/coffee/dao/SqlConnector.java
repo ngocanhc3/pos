@@ -17,8 +17,8 @@ import java.sql.Statement;
  */
 public class SqlConnector {
     
-    final String CONN_URL = "jdbc:sqlserver://;servername=LAPTOP-09VI68L4\\PC;databaseName=coffee_pos;username=sa;password=Abc!1234;encrypt=true;trustServerCertificate=true;useUnicode=true;characterEncoding=UTF-8;";
-//    final String CONN_URL = "jdbc:sqlserver://84.247.162.137:1433;databaseName=cfpos;encrypt=true;trustServerCertificate=true;useUnicode=true;characterEncoding=UTF-8";
+//    final String CONN_URL = "jdbc:sqlserver://;servername=LAPTOP-09VI68L4\\PC;databaseName=coffee_pos;username=sa;password=Abc!1234;encrypt=true;trustServerCertificate=true;useUnicode=true;characterEncoding=UTF-8;";
+    final String CONN_URL = "jdbc:sqlserver://84.247.162.137:1433;databaseName=cfpos;encrypt=true;trustServerCertificate=true;useUnicode=true;characterEncoding=UTF-8";
     public SqlConnector() throws SQLException {
     }
 

@@ -89,8 +89,9 @@ public class MenuItemDao extends BaseDao implements IGeneric<MenuItem, Long> {
             List<MenuItem> ls = new ArrayList<>();
             String SQL = "Select * from MenuItem ";
             if (whereClause != null && ! whereClause.isEmpty()) {
-                SQL = String.format("%s WHERE 1 = 1 AND %s", SQL, whereClause);
+                SQL = String.format("%s WHERE 1 = 1 AND %s ", SQL, whereClause);
             }
+//            SQL = String.format("%s ORDER BY name", SQL);
             ResultSet result = this.connector.select(SQL);
             while (result.next()) {
                 ls.add(new MenuItem(result));

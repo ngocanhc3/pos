@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import vn.edu.coffee.controllers.MenuItemCtrl;
+import vn.edu.coffee.events.ActionAddMenuItem;
 import vn.edu.coffee.events.MyActionEvent;
 import vn.edu.coffee.models.MenuItem;
 import vn.edu.coffee.views.HelperUI;
@@ -39,34 +40,45 @@ public class MenuItemPUI extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbItems = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        lblTotal = new javax.swing.JLabel();
-        btnItemAdd = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDown = new javax.swing.JButton();
+        lblQty = new javax.swing.JLabel();
+        btnUp = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Menus");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 1, 4, 1));
+        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 4, 8, 2));
+        jPanel4.setLayout(new java.awt.BorderLayout(4, 0));
+        jPanel4.add(txtSearch, java.awt.BorderLayout.CENTER);
+
+        jLabel2.setText("Search");
+        jPanel4.add(jLabel2, java.awt.BorderLayout.LINE_START);
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnSearch, java.awt.BorderLayout.LINE_END);
+
+        jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -89,47 +101,86 @@ public class MenuItemPUI extends javax.swing.JPanel {
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblTotal.setText("Total");
-        lblTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 1));
-        jPanel3.add(lblTotal, java.awt.BorderLayout.CENTER);
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 8, 4));
 
-        btnItemAdd.setBackground(new java.awt.Color(102, 255, 51));
-        btnItemAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnItemAdd.setForeground(new java.awt.Color(255, 51, 51));
-        btnItemAdd.setText("+");
-        btnItemAdd.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 1, 5, 1));
-        btnItemAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnDown.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDown.setText("-");
+        btnDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnItemAddActionPerformed(evt);
+                btnDownActionPerformed(evt);
             }
         });
-        jPanel3.add(btnItemAdd, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(btnDown);
+
+        lblQty.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblQty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblQty.setText("1");
+        jPanel2.add(lblQty);
+
+        btnUp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUp.setText("+");
+        btnUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnUp);
+
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd.setText("Add Item");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAdd);
+
+        jPanel3.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         add(jPanel3, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemAddActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         onItemAmountUp();
-    }//GEN-LAST:event_btnItemAddActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpActionPerformed
+        onUpDown(1);
+    }//GEN-LAST:event_btnUpActionPerformed
+
+    private void btnDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownActionPerformed
+        onUpDown(-1);
+    }//GEN-LAST:event_btnDownActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        onLoadData();
+    }//GEN-LAST:event_btnSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnItemAdd;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDown;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblQty;
     private javax.swing.JTable tbItems;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
     MenuItemCtrl ctrl;
     private DefaultTableModel tbModel;
-
+    
     private void afternitComponents() {
+//        btnDown.setEnabled(false);
         ctrl = new MenuItemCtrl();
         this.tbModel = (DefaultTableModel) tbItems.getModel();
-        btnItemAdd.setEnabled(false);
+        btnAdd.setEnabled(false);
         this.tbItems.getSelectionModel().addListSelectionListener(new OnTableSelect());
         HelperUI.setTbColAlignment(tbItems, 0, SwingConstants.CENTER, 50);
         HelperUI.setTbColAlignment(tbItems, 1, SwingConstants.LEFT, 0);
@@ -137,39 +188,51 @@ public class MenuItemPUI extends javax.swing.JPanel {
         HelperUI.setRowEditDisable(tbItems);
         onLoadData();
     }
-
+    
     List<MenuItem> items;
-
+    
     private void onLoadData() {
         tbItems.removeAll();
         tbModel.setRowCount(0);
-        items = ctrl.all();
+        items = ctrl.find(txtSearch.getText());
         for (MenuItem menuItem : items) {
-
+            
             tbModel.addRow(new Object[]{
                 menuItem.getId(),
                 menuItem.getName(),
                 String.format("%(,.0f", menuItem.getPrice()),});
         }
 
-        lblTotal.setText(String.format("Total: %d Records", items.size()));
+//        lblTotal.setText(String.format("Total: %d Records", items.size()));
         tbItems.revalidate();
         tbItems.repaint();
     }
-    public MyActionEvent<MenuItem> setRowSelected;
-
+    public ActionAddMenuItem setRowSelected;
+    
     private MenuItem itemSelected;
+
     private void onItemAmountUp() {
         if (itemSelected != null && setRowSelected != null) {
-            setRowSelected.onAction(itemSelected);
+            setRowSelected.onAction(itemSelected, quantity);
+            quantity = 1;
+            lblQty.setText(quantity + "");
+//            btnDown.setEnabled(quantity > 1);
 //            itemSelected = null;
-            btnItemAdd.setEnabled(false);
-            tbItems.repaint();
+            btnAdd.setEnabled(false);
+            onLoadData();
         }
     }
+    
+    private Integer quantity = 1;
 
+    private void onUpDown(int step) {
+        quantity += step;
+//        btnDown.setEnabled(quantity > 1);
+        lblQty.setText(quantity + "");
+    }
+    
     private class OnTableSelect implements ListSelectionListener {
-
+        
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()) {
@@ -179,7 +242,7 @@ public class MenuItemPUI extends javax.swing.JPanel {
                     for (MenuItem item : items) {
                         if (item.getId() == id) {
                             itemSelected = item;
-                            btnItemAdd.setEnabled(true);
+                            btnAdd.setEnabled(true);
                             break;
                         }
                     }

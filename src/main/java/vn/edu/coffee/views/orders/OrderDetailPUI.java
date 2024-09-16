@@ -84,6 +84,7 @@ public class OrderDetailPUI extends javax.swing.JPanel {
                 "Name", "Amount", "Price", "Total"
             }
         ));
+        tbItems.setEnabled(false);
         tbItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbItems.setShowGrid(true);
@@ -94,21 +95,22 @@ public class OrderDetailPUI extends javax.swing.JPanel {
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 51, 51));
         lblTotal.setText("Total");
-        lblTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 20, 3, 1));
+        lblTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 8, 3, 1));
         jPanel3.add(lblTotal, java.awt.BorderLayout.CENTER);
 
         btnCheckOut.setBackground(new java.awt.Color(255, 102, 102));
         btnCheckOut.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCheckOut.setForeground(new java.awt.Color(255, 255, 255));
         btnCheckOut.setText("Check Out");
-        btnCheckOut.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        btnCheckOut.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 12, 4, 12));
         btnCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCheckOutActionPerformed(evt);
             }
         });
-        jPanel3.add(btnCheckOut, java.awt.BorderLayout.PAGE_END);
+        jPanel3.add(btnCheckOut, java.awt.BorderLayout.LINE_END);
 
         btnItemSub.setBackground(new java.awt.Color(51, 255, 0));
         btnItemSub.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

@@ -13,22 +13,22 @@ import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import vn.edu.coffee.controllers.BillCtrl;
+import vn.edu.coffee.models.Bill;
 import vn.edu.coffee.utils.DateUtils;
-import vn.edu.coffee.views.BaseFrame;
 import vn.edu.coffee.views.HelperUI;
 
 /**
  *
- * @author Ngoc Anh
+ * @author thuandv
  */
-public class OrderReportUI extends BaseFrame {
+public class OrdersUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form OrderReportUI
+     * Creates new form OrdersUI
      */
-    public OrderReportUI() {
+    public OrdersUI() {
         initComponents();
-        afterInitComponents();
+        customComponents();
     }
 
     /**
@@ -40,7 +40,7 @@ public class OrderReportUI extends BaseFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jpanels = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         dtpFrom = new javax.swing.JFormattedTextField();
@@ -48,17 +48,16 @@ public class OrderReportUI extends BaseFrame {
         dtpTo = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tbItems = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         lblInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Order Report");
-        setAlwaysOnTop(true);
+        setTitle("Order Management");
         setResizable(false);
 
-        jPanel1.setLayout(new java.awt.BorderLayout(4, 4));
+        jPanel2.setLayout(new java.awt.BorderLayout(4, 4));
 
         jpanels.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 4, 8));
         jpanels.setLayout(new javax.swing.BoxLayout(jpanels, javax.swing.BoxLayout.LINE_AXIS));
@@ -89,43 +88,36 @@ public class OrderReportUI extends BaseFrame {
         });
         jpanels.add(btnSearch);
 
-        jPanel1.add(jpanels, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(jpanels, java.awt.BorderLayout.PAGE_START);
 
-        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 2, 1, 2));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(600, 404));
 
         tbItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Date", "Amount", "Total"
+                "Date", "Amount", "Total", "Check In", "Check out"
             }
         ));
-        jScrollPane1.setViewportView(tbItems);
+        tbItems.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane2.setViewportView(tbItems);
 
-        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 8, 8, 8));
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 8, 8, 8));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
         lblInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblInfo.setForeground(new java.awt.Color(255, 51, 51));
         lblInfo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblInfo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel2.add(lblInfo, java.awt.BorderLayout.PAGE_START);
+        jPanel3.add(lblInfo, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -142,9 +134,9 @@ public class OrderReportUI extends BaseFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanels;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JTable tbItems;
@@ -155,15 +147,17 @@ public class OrderReportUI extends BaseFrame {
     private final String DATE_FORMAT = "dd/MM/yyyy";
     private final String DATE_FORMAT_SQL = "yyyy-MM-dd";
 
-    private void afterInitComponents() {
+    private void customComponents() {
         setLocationRelativeTo(null);
         billCtrl = new BillCtrl();
         this.tableModel = (DefaultTableModel) tbItems.getModel();
         HelperUI.setTbColAlignment(tbItems, 0, SwingConstants.CENTER, 0);
         HelperUI.setTbColAlignment(tbItems, 1, SwingConstants.CENTER, 0);
         HelperUI.setTbColAlignment(tbItems, 2, SwingConstants.RIGHT, 0);
-        HelperUI.setRowEditDisable(tbItems);
+        HelperUI.setTbColAlignment(tbItems, 3, SwingConstants.CENTER, 120);
+        HelperUI.setTbColAlignment(tbItems, 4, SwingConstants.CENTER, 120);
 
+        HelperUI.setRowEditDisable(tbItems);
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
         dtpFrom.setText(DateUtils.firstDayOfMonth(now).format(formatter));
@@ -172,34 +166,36 @@ public class OrderReportUI extends BaseFrame {
     }
 
     private void onLoadData() {
+        try {
+            List<Bill> list = billCtrl.find(
+                    DateUtils.convertString2LocalDate(dtpFrom.getText()),
+                    DateUtils.convertString2LocalDate(dtpTo.getText())
+            );
+            tableModel.setRowCount(0);
+            tbItems.removeAll();
+            float total = 0f;
+            for (Bill item : list) {
 
-        final String sql = String.format(" checkoutAt BETWEEN '%s' AND '%s'",
-                getDateSql(dtpFrom.getText()),
-                getDateSql(dtpTo.getText())
-        );
-        
-        List<Object[]> list = billCtrl.orderReport(sql);
-        tableModel.setRowCount(0);
-        tbItems.removeAll();
-        float total = 0f;
-        for (Object[] objects : list) {
-            total += (Float) objects[2];
-            tableModel.addRow(new Object[]{
-                objects[0],
-                objects[1],
-                String.format("%(,.0f", objects[2])
-            });
+                tableModel.addRow(new Object[]{
+                    item.getId(),
+                    item.getAmount(),
+                    String.format("%(,.0f", item.getTotal()),
+                    DateUtils.formatLocalDateTime(item.getCheckinAt()),
+                    DateUtils.formatLocalDateTime(item.getCheckoutAt())
+                });
+            }
+            tbItems.revalidate();
+            tbItems.repaint();
+            lblInfo.setText(String.format("Total: %(,.0f", total));
+            tbItems.revalidate();
+            tbItems.repaint();
+        } catch (Exception e) {
+            HelperUI.showMessage(this, e.getMessage());
         }
-        tbItems.revalidate();
-        tbItems.repaint();
-        lblInfo.setText(String.format("Total: %(,.0f", total));
-        tbItems.revalidate();
-        tbItems.repaint();
     }
 
     private String getDateSql(String val) {
         return LocalDate.parse(val, DateTimeFormatter.ofPattern(DATE_FORMAT))
                 .format(DateTimeFormatter.ofPattern(DATE_FORMAT_SQL));
     }
-
 }
